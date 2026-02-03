@@ -17,6 +17,10 @@ An AI-powered mock interview platform built using Django and Gemini AI.
 - Database: SQLite
 
 ## Setup Instructions
+
+1. Create a `.env` file in the root directory
+2. Add your Gemini API key:
+   GOOGLE_API_KEY=your_api_key_here
 ```bash
 python -m venv venv
 venv\Scripts\activate
