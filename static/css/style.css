@@ -1,0 +1,244 @@
+
+  /* Page background gradient */
+  body {
+    background: linear-gradient(180deg, #f0f4ff, #ffffff);
+    min-height: 100vh;
+  }
+  html,
+  body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  /* Hero section */
+
+  .hero {
+    max-width: 1100px;
+    margin: 120px auto 80px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    gap: 40px;
+  }
+
+  /* Left content */
+  .hero-left {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  /* Right image container */
+  .hero-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-image {
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6fa8ff, #b79cff);
+    padding: 14px;
+    box-shadow:
+      0 30px 60px rgba(108, 99, 255, 0.35),
+      inset 0 0 40px rgba(255, 255, 255, 0.4);
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #f4f6ff;
+    padding: 20px;
+  }
+
+  /* Title styling */
+  .hero h1 {
+    color: #6c63ff;
+    font-weight: 800;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+
+  /* Subtitle styling */
+  .hero p {
+    color: #555;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+
+  /* Buttons container */
+  .hero .btn-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  /* Button styling */
+  .home-btn {
+    padding: 12px 25px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #6fa8ff, #b79cff);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .home-btn:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
+  }
+
+  /* Icon */
+  .hero-icon {
+    font-size: 60px;
+    margin-bottom: 20px;
+  }
+
+  /* Common section styling */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto 80px;
+    padding: 0 20px;
+  }
+
+  .section h2 {
+    text-align: center;
+    color: #6c63ff;
+    font-weight: 800;
+    margin-bottom: 40px;
+  }
+
+  /* Cards */
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 240px));
+    gap: 25px;
+    justify-content: center;
+  }
+
+  .info-card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    box-shadow:
+      0 25px 60px rgba(108, 99, 255, 0.35),
+      0 10px 30px rgba(108, 99, 255, 0.25);
+  }
+
+  .info-card h4 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .info-card p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* Steps */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+  }
+
+  .step {
+    background: white;
+    border-radius: 18px;
+    padding: 30px 25px;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+  }
+
+  .step:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 45px rgba(108, 99, 255, 0.25);
+  }
+
+  .step span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6fa8ff, #b79cff);
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+  }
+
+  /* ================= FOOTER ================= */
+  .site-footer {
+    background: linear-gradient(135deg, #1e3a8a, #312e81);
+    color: white;
+    margin-top: 100px;
+    padding-top: 50px;
+  }
+
+  .footer-container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 20px 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 40px;
+  }
+
+  .footer-section h3,
+  .footer-section h4 {
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+
+  .footer-section p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #f0f0ff;
+  }
+
+  .footer-section a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .footer-section a:hover {
+    text-decoration: underline;
+  }
+
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-section ul li {
+    margin-bottom: 8px;
+  }
+
+  /* Bottom bar */
+  .footer-bottom {
+    background: rgba(0, 0, 0, 0.15);
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 0.9rem;
+    color: #f5f5ff;
+  }

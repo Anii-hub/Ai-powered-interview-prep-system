@@ -1,0 +1,171 @@
+{% extends "base.html" %} {% block content %}
+
+<style>
+  .page-title {
+    color: #4a6cf7;
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+
+  .theme-card {
+    background: white;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: 0.3s;
+  }
+
+  .theme-card h6 {
+    color: #777;
+    font-weight: 500;
+  }
+
+  .theme-card h3 {
+    color: #6a7cff;
+    font-weight: 700;
+  }
+
+  .big-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 35px;
+  }
+
+  table {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  thead {
+    background: #f2f5ff;
+  }
+
+  .badge-score {
+    background: linear-gradient(135deg, #6fa8ff, #b79cff);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+</style>
+
+<h3 class="page-title">Interview Analytics</h3>
+
+<!-- SUMMARY CARDS -->
+<div class="row mb-4 g-3">
+  <div class="col-md-3">
+    <div class="theme-card">
+      <h6>Total Interviews</h6>
+      <h3>{{ total_interviews }}</h3>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="theme-card">
+      <h6>Average Score</h6>
+      <h3>{{ avg_score }}/10</h3>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="theme-card">
+      <h6>Best Score</h6>
+      <h3>{{ best_score }}/10</h3>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="theme-card">
+      <h6>Last Interview</h6>
+      <h3>{{ last_score }}/10</h3>
+    </div>
+  </div>
+</div>
+
+<!-- SCORE TREND -->
+<div class="big-card">
+  <h5 class="mb-3" style="color: #6a7cff">Score Progress Over Time</h5>
+  <canvas id="scoreChart"></canvas>
+</div>
+
+<!-- INTERVIEW HISTORY TABLE -->
+<div class="big-card">
+  <h5 class="mb-3" style="color: #6a7cff">Interview History</h5>
+
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Date</th>
+          <th>Score</th>
+          <th>Difficulty</th>
+          <th>Mode</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for r in results %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ r.created_at|date:"d M Y" }}</td>
+          <td>
+            <span class="badge-score">{{ r.score }}/10</span>
+          </td>
+          <td>{{ r.difficulty|default:"—" }}</td>
+          <td>{{ r.mode|default:"General" }}</td>
+        </tr>
+
+        {% empty %}
+        <tr>
+          <td colspan="5" class="text-center text-muted py-4">
+            No interviews yet
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- DATA FOR CHART -->
+{{ dates|json_script:"dates-data" }} {{ scores|json_script:"scores-data" }}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const labels = JSON.parse(document.getElementById("dates-data").textContent);
+  const scores = JSON.parse(document.getElementById("scores-data").textContent);
+
+  const ctx = document.getElementById("scoreChart");
+
+  new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "Interview Score",
+          data: scores,
+          borderWidth: 2,
+          tension: 0.4,
+          fill: false,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          min: 0,
+          max: 10,
+          ticks: { stepSize: 1 },
+        },
+      },
+    },
+  });
+</script>
+
+{% endblock %}

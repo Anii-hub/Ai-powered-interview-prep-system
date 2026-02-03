@@ -1,0 +1,156 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="row justify-content-center mt-5">
+  <div class="col-md-7">
+    <div
+      class="card shadow-sm p-4 rounded-3"
+      style="background: #f4f5f9; border: none"
+    >
+      <h4 class="mb-4 text-center" style="color: #5b4bda">Interview Setup</h4>
+
+      {% if request.session.resume_uploaded %}
+      <div
+        class="alert alert-success d-flex align-items-center"
+        style="background: #e0f2ff; color: #0b5394; border: none"
+      >
+        ✅ Resume uploaded. You can start a resume-based interview.
+      </div>
+      {% else %}
+      <div
+        class="alert alert-warning d-flex align-items-center"
+        style="background: #fff3e0; color: #d46b00; border: none"
+      >
+        ⚠️ No resume uploaded. Resume-based interview disabled.
+      </div>
+      {% endif %}
+
+      <form method="post" action="{% url 'start_interview' %}" class="mt-4">
+        {% csrf_token %}
+
+        <!-- ================= TOPIC SECTION ================= -->
+        <div id="topicBlock">
+          <label class="form-label fw-semibold" style="color: #5b4bda"
+            >Interview Topic</label
+          >
+          <input
+            type="text"
+            name="topic"
+            id="topicInput"
+            class="form-control shadow-sm"
+            placeholder="e.g. Python Backend, Machine Learning, System Design"
+            style="border-radius: 0.5rem; border: 1px solid #dcdcf3"
+            required
+          />
+          <!-- Quick suggestions -->
+          <div class="mt-2">
+            <span
+              class="badge topic-suggestion"
+              style="background: #5b4bda; cursor: pointer; margin-right: 5px"
+              >Python</span
+            >
+            <span
+              class="badge topic-suggestion"
+              style="background: #5b4bda; cursor: pointer; margin-right: 5px"
+              >Django</span
+            >
+            <span
+              class="badge topic-suggestion"
+              style="background: #5b4bda; cursor: pointer; margin-right: 5px"
+              >DSA</span
+            >
+            <span
+              class="badge topic-suggestion"
+              style="background: #5b4bda; cursor: pointer; margin-right: 5px"
+              >System Design</span
+            >
+          </div>
+        </div>
+
+        <!-- ================= DIFFICULTY ================= -->
+        <label class="form-label mt-3 fw-semibold" style="color: #5b4bda"
+          >Difficulty</label
+        >
+        <select
+          name="difficulty"
+          class="form-select mb-3 shadow-sm"
+          style="border-radius: 0.5rem; border: 1px solid #dcdcf3"
+        >
+          <option>Beginner</option>
+          <option>Intermediate</option>
+          <option>Advanced</option>
+        </select>
+
+        <!-- ================= QUESTION COUNT ================= -->
+        <label class="form-label fw-semibold" style="color: #5b4bda"
+          >Number of Questions</label
+        >
+        <select
+          name="num_questions"
+          class="form-select mb-3 shadow-sm"
+          style="border-radius: 0.5rem; border: 1px solid #dcdcf3"
+        >
+          <option value="3">3 Questions</option>
+          <option value="5" selected>5 Questions</option>
+          <option value="10">10 Questions</option>
+        </select>
+
+        <!-- ================= MODE ================= -->
+        <label class="form-label fw-semibold" style="color: #5b4bda"
+          >Interview Mode</label
+        >
+        <select
+          name="mode"
+          id="modeSelect"
+          class="form-select mb-4 shadow-sm"
+          style="border-radius: 0.5rem; border: 1px solid #dcdcf3"
+        >
+          <option value="text">General Interview</option>
+          {% if request.session.resume_uploaded %}
+          <option value="resume">Resume-Based Interview</option>
+          {% endif %}
+        </select>
+
+        <button
+          class="btn w-100"
+          style="
+            background: #5b4bda;
+            color: white;
+            border-radius: 0.5rem;
+            font-weight: 500;
+          "
+        >
+          Start Interview
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modeSelect = document.getElementById("modeSelect");
+  const topicBlock = document.getElementById("topicBlock");
+  const topicInput = document.getElementById("topicInput");
+
+  function toggleTopic() {
+    if (modeSelect.value === "resume") {
+      topicBlock.style.display = "none";
+      topicInput.removeAttribute("required");
+      topicInput.value = "";
+    } else {
+      topicBlock.style.display = "block";
+      topicInput.setAttribute("required", "required");
+    }
+  }
+
+  document.querySelectorAll(".topic-suggestion").forEach((el) => {
+    el.addEventListener("click", () => {
+      topicInput.value = el.innerText;
+      topicInput.focus();
+    });
+  });
+
+  modeSelect.addEventListener("change", toggleTopic);
+  toggleTopic();
+</script>
+
+{% endblock %}

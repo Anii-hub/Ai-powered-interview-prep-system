@@ -1,0 +1,174 @@
+{% extends 'base.html' %}{% load static %} {% block nav_links %}
+<a href="#home" class="nav-link fw-semibold">Home</a>
+<a href="#about" class="nav-link fw-semibold">About</a>
+<a href="#contact" class="nav-link fw-semibold">Contact</a>
+{% endblock %} {% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% endblock %} {% block content %}
+
+<!-- HERO -->
+<div class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-icon">🤖</div>
+    <h1>AI Mock Interview Platform</h1>
+
+    <p>Practice interviews, get AI feedback, and improve your skills</p>
+
+    <div class="btn-container">
+      <a href="{% url 'login' %}" class="home-btn">Login</a>
+      <a href="{% url 'register' %}" class="home-btn">Register</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-image">
+      <img src="{% static 'images/img1.jpg' %}" alt="AI Interviewer" />
+    </div>
+  </div>
+</div>
+
+<!-- WHO BENEFITS  -->
+<div class="section">
+  <h2>Who Benefits From Simulations?</h2>
+
+  <div class="card-grid">
+    <div class="info-card">
+      <h4>🎓 Students & Freshers</h4>
+      <p>
+        Practice interviews in a safe environment and gain confidence before
+        facing real recruiters.
+      </p>
+    </div>
+
+    <div class="info-card">
+      <h4>💼 Job Seekers</h4>
+      <p>
+        Prepare for technical and HR interviews with AI-driven questions and
+        feedback.
+      </p>
+    </div>
+
+    <div class="info-card">
+      <h4>🚀 Career Switchers</h4>
+      <p>
+        Get comfortable with new domains and interview styles without pressure.
+      </p>
+    </div>
+
+    <div class="info-card">
+      <h4>🏢 Professionals</h4>
+      <p>
+        Sharpen communication, confidence, and clarity for leadership or senior
+        roles.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!--  HOW IT WORKS -->
+<div class="section" id="about">
+  <h2>How the AI Mock Interview Works</h2>
+
+  <div class="steps">
+    <div class="step">
+      <span>1</span>
+      <h4>Choose Interview Type</h4>
+      <p>Select general or resume-based interviews.</p>
+    </div>
+
+    <div class="step">
+      <span>2</span>
+      <h4>Answer Questions</h4>
+      <p>Type or speak answers while AI listens and analyzes.</p>
+    </div>
+
+    <div class="step">
+      <span>3</span>
+      <h4>AI Evaluation</h4>
+      <p>Your responses are analyzed for clarity and confidence.</p>
+    </div>
+
+    <div class="step">
+      <span>4</span>
+      <h4>Get Feedback</h4>
+      <p>Receive detailed AI feedback and performance scores.</p>
+    </div>
+  </div>
+</div>
+
+<!--  FEATURES & BENEFITS  -->
+<div class="section">
+  <h2>Features & Benefits</h2>
+
+  <div class="card-grid">
+    <div class="info-card">
+      <h4>📄 Resume-Based Interviews</h4>
+      <p>AI generates questions directly from your uploaded resume.</p>
+    </div>
+
+    <div class="info-card">
+      <h4>🎤 Voice Input Analysis</h4>
+      <p>Measure confidence and speaking speed using voice metrics.</p>
+    </div>
+
+    <div class="info-card">
+      <h4>🔊 AI Reads Questions</h4>
+      <p>Experience a real interviewer with spoken questions.</p>
+    </div>
+
+    <div class="info-card">
+      <h4>📊 Performance Analytics</h4>
+      <p>Track scores, progress, and improvement over time.</p>
+    </div>
+
+    <div class="info-card">
+      <h4>🧠 Smart AI Feedback</h4>
+      <p>Detailed insights on strengths and areas to improve.</p>
+    </div>
+
+    <div class="info-card">
+      <h4>⏱ Practice Anytime</h4>
+      <p>No pressure, no limits — practice whenever you want.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER  -->
+<footer class="site-footer" id="contact">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>AI Mock Interview</h3>
+      <p>
+        Practice smarter interviews with AI-driven feedback, resume-based
+        questions, and voice analysis.
+      </p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>
+        Email:
+        <a href="mailto:support@aimockinterview.com"
+          >support@aimockinterview.com</a
+        >
+      </p>
+      <p>Phone: +91 9824563715</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'register' %}">Register</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © {{ year|default:2026 }} AI Mock Interview Platform. All rights reserved.
+  </div>
+</footer>
+
+{% endblock %}

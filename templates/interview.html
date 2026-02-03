@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% if request.session.mode == "resume" %}
+<div
+  class="alert mb-3"
+  style="
+    background: #e0f2ff;
+    color: #0b5394;
+    border: none;
+    border-radius: 0.5rem;
+  "
+>
+  📄 This interview is based on your uploaded resume
+</div>
+{% endif %}
+
+<!-- ================= QUESTION COUNTER ================= -->
+<div id="questionCounter" class="mb-2 text-muted" style="font-weight: 500">
+  Question {{ current }} of {{ total }}
+</div>
+
+<!-- ================= QUESTION CARD ================= -->
+<div
+  class="card shadow-sm p-4 mb-3 rounded-3"
+  style="background: #f4f5f9; border: none"
+>
+  <div
+    id="questionText"
+    style="
+      font-family: &quot;Georgia&quot;, &quot;Times New Roman&quot;, serif;
+      font-size: 1.15rem;
+      line-height: 1.6;
+      color: #333;
+    "
+  >
+    {{ question }}
+  </div>
+
+  <button
+    id="readQuestionBtn"
+    class="btn mt-3"
+    style="background: #5b4bda; color: white; border-radius: 0.5rem"
+  >
+    🔊 Read Question
+  </button>
+</div>
+
+<!-- ================= ANSWER CARD ================= -->
+<div
+  class="card shadow-sm p-4 rounded-3"
+  style="background: #f4f5f9; border: none"
+>
+  <h5 class="mb-3" style="color: #5b4bda">Your Answer</h5>
+
+  <textarea
+    id="answerBox"
+    class="form-control mb-3 shadow-sm"
+    rows="6"
+    placeholder="Type your answer or use voice input..."
+    style="border-radius: 0.5rem; border: 1px solid #dcdcf3"
+  ></textarea>
+
+  <div class="d-flex gap-2">
+    <button
+      id="micBtn"
+      class="btn"
+      style="background: #d9534f; color: white; border-radius: 0.5rem"
+    >
+      🎤 Speak
+    </button>
+
+    <button
+      id="submitBtn"
+      class="btn ms-auto"
+      style="background: #5b4bda; color: white; border-radius: 0.5rem"
+    >
+      Submit
+    </button>
+  </div>
+
+  <div id="errorBox" class="text-danger mt-3"></div>
+</div>
+
+<!-- ================= FEEDBACK ================= -->
+<div
+  id="feedbackBox"
+  class="card shadow-sm p-4 mt-4 rounded-3"
+  style="display: none; background: #f4f5f9; border: none"
+>
+  <h5 style="color: #5b4bda">AI Feedback</h5>
+
+  <div
+    id="feedbackContent"
+    class="mt-3 p-3 bg-light border rounded"
+    style="white-space: pre-wrap; font-family: system-ui; border-color: #dcdcf3"
+  ></div>
+</div>
+
+<!-- ================= REQUIRED FOR AJAX ================= -->
+<input type="hidden" id="csrfToken" value="{{ csrf_token }}" />
+<input type="hidden" id="submitUrl" value="{% url 'submit_answer' %}" />
+
+<!-- ================= JS ================= -->
+<script src="{% static 'js/interview.js' %}"></script>
+
+{% endblock %}

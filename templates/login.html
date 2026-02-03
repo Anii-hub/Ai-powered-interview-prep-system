@@ -1,0 +1,111 @@
+{% extends "base.html" %} {% block content %}
+
+<style>
+  .auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  }
+
+  .auth-title {
+    text-align: center;
+    color: #4a6cf7;
+    font-weight: 600;
+    margin-bottom: 25px;
+  }
+
+  .form-control {
+    border-radius: 10px;
+    padding: 10px 14px;
+    border: 1px solid #dbe2ff;
+  }
+
+  .form-control:focus {
+    border-color: #9b8cff;
+    box-shadow: 0 0 0 0.15rem rgba(155, 140, 255, 0.25);
+  }
+
+  .btn-auth {
+    width: 100%;
+    background: linear-gradient(135deg, #6fa8ff, #b79cff);
+    border: none;
+    border-radius: 12px;
+    padding: 10px;
+    color: white;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+
+  .btn-auth:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .footer-text {
+    text-align: center;
+    margin-top: 18px;
+    color: #888;
+    font-size: 0.9rem;
+  }
+
+  .alert-light-red {
+    background-color: #f8d7da; 
+    color: #721c24; 
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    text-align: center;
+  }
+</style>
+
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h3 class="auth-title">Sign In</h3>
+
+    <form method="post">
+      {% csrf_token %} {% if error_msg %}
+      <div class="alert-light-red">{{ error_msg }}</div>
+      {% endif %}
+
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input
+          type="text"
+          name="username"
+          class="form-control"
+          placeholder="Enter username"
+          value="{{ username }}"
+          required
+        />
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Password</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          placeholder="Enter password"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn-auth">Login</button>
+    </form>
+
+    <div class="footer-text">AI Powered Mock Interview System</div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="row justify-content-center mt-5">
+  <div class="col-md-6">
+    <div
+      class="card shadow-sm p-4 rounded-3"
+      style="background: #f4f5f9; border: none"
+    >
+      <h4 class="mb-4 text-center" style="color: #5b4bda">
+        Upload Resume (PDF)
+      </h4>
+
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <input
+          type="file"
+          name="resume"
+          accept=".pdf"
+          class="form-control mb-3 shadow-sm"
+          style="border-radius: 0.5rem; border: 1px solid #dcdcf3"
+          required
+        />
+
+        <button
+          class="btn w-100"
+          style="
+            background: #5b4bda;
+            color: white;
+            border-radius: 0.5rem;
+            font-weight: 500;
+          "
+        >
+          Upload & Analyze Resume
+        </button>
+      </form>
+
+      {% if request.session.resume_uploaded %}
+      <div
+        class="alert mt-3"
+        style="
+          background: #e0f2ff;
+          color: #0b5394;
+          border: none;
+          border-radius: 0.5rem;
+        "
+      >
+        ✅ Resume uploaded and analyzed successfully.
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,165 @@
+{% extends "base.html" %} {% block content %}
+
+<style>
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, #eef5ff 0%, #dfe8ff 100%);
+    z-index: -1;
+  }
+
+  .dashboard-wrapper {
+    min-height: 100vh;
+    width: 100%;
+    padding: 40px 20px 60px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dashboard-top {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border-radius: 15px;
+    padding: 15px 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  }
+
+  .dashboard-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4a6cf7;
+    text-align: center;
+  }
+
+  .logout-btn {
+    position: absolute;
+    right: 20px;
+  }
+
+  .logout-btn button {
+    border: 2px solid #f56565;
+    color: #f56565;
+    background: transparent;
+    padding: 8px 18px;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .logout-btn button:hover {
+    background: #f56565;
+    color: white;
+    transform: scale(1.05);
+  }
+
+  /* Cards grid */
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 35px;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 50px;
+    justify-content: center;
+  }
+
+  .dashboard-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 25px;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .dashboard-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 40px rgba(0, 0, 0, 0.12);
+  }
+
+  .dashboard-card h5 {
+    color: #4a6cf7;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+
+  .dashboard-card p {
+    color: #555;
+    font-size: 1rem;
+    margin-bottom: 25px;
+  }
+
+  .dashboard-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #6fa8ff, #b79cff);
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .dashboard-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(111, 168, 255, 0.4);
+  }
+</style>
+
+<div class="dashboard-wrapper">
+  <div class="dashboard-top">
+    <div class="dashboard-title">Dashboard</div>
+
+    <form method="post" action="{% url 'logout' %}" class="logout-btn">
+      {% csrf_token %}
+      <button type="submit">Logout</button>
+    </form>
+  </div>
+
+  <!-- Dashboard cards -->
+  <div class="dashboard-grid">
+    <div class="dashboard-card">
+      <h5>Start Interview</h5>
+      <p>Begin your AI mock interview</p>
+      <a href="{% url 'interview_setup' %}" class="dashboard-btn">Start</a>
+    </div>
+
+    <div class="dashboard-card">
+      <h5>Upload Resume</h5>
+      <p>Personalize interviews using resume</p>
+      <a href="{% url 'resume_upload' %}" class="dashboard-btn">Upload</a>
+    </div>
+
+    <div class="dashboard-card">
+      <h5>Analyzer</h5>
+      <p>View feedback and performance</p>
+      <a href="{% url 'analytics' %}" class="dashboard-btn">View</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
